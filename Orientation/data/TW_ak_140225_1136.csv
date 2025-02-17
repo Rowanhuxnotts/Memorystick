@@ -1,0 +1,8 @@
+ParticipantID,StimOrientation,Direction,ResponseTime,IsOddBall,WaveSpeed
+ak,SpiralR,left,4.50633883476,N,nan
+ak,ConcentricL,right,1.59808301926,N,1.59808301926
+ak,ConcentricR,left,6.15712594986,N,1.59808301926
+ak,RadialL,lctrl,6.82087898254,N,nan
+ak,SpiralL,left,5.32086706161,N,nan
+ak,SpiralR,left,6.28350400925,Y,nan
+ak,RadialR,right,1.13151097298,N,1.13151097298

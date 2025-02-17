@@ -1,0 +1,243 @@
+s['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((-0.5*surroundDisp)-horizPos,-vertPos+vertShift))
+
+Surround1R = visual.PatchStim(winR, tex=None, mask='gauss', units='pix', contrast = params['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((0.5*surroundDisp)+crowding,vertShift))
+Surround2R = visual.PatchStim(winR, tex=None, mask='gauss', units='pix', contrast = params['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((0.5*surroundDisp)-crowding,vertShift))
+Surround3R = visual.PatchStim(winR, tex=None, mask='gauss', units='pix', contrast = params['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((0.5*surroundDisp)+horizPos,vertPos+vertShift))
+Surround4R = visual.PatchStim(winR, tex=None, mask='gauss', units='pix', contrast = params['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((0.5*surroundDisp)+horizPos,-vertPos+vertShift))
+Surround5R = visual.PatchStim(winR, tex=None, mask='gauss', units='pix', contrast = params['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((0.5*surroundDisp)-horizPos,vertPos+vertShift))
+Surround6R = visual.PatchStim(winR, tex=None, mask='gauss', units='pix', contrast = params['contrast'], size=surroundsize,sf=[SFpixels,0],pos=((0.5*surroundDisp)-horizPos,-vertPos+vertShift))
+
+
+
+#FOR STEREO THRESH MOCS
+
+#Functions for checking keys for MOCS 
+def checkCorrect(keys):
+    for key in keys:		
+        if key=='escape':
+            winL.close()
+            winR.close()
+            core.quit()
+        elif key in ['1','num_1','3','num_3']:
+            if (key in ['3','num_3']):
+                return 1
+            else: 
+                return 0
+        else: 
+            return None
+
+# MoCS Levels (STEREO)
+params['nSteps'] = 9
+maxDisp= params['RangeShift']+(params['StepSize(sec)']*(params['nSteps']/2))
+minDisp= params['RangeShift']-(params['StepSize(sec)']*(params['nSteps']/2))
+
+print 'maxdisp', maxDisp
+print 'mindisp', minDisp
+
+params['Disparities'] = num.arange(minDisp, maxDisp+params['StepSize(sec)'], params['StepSize(sec)'])
+print params['Disparities']
+print 'length', len(params['Disparities'])
+
+params['Disparities']=params['Disparities'].tolist()
+if len(params['Disparities'])==10:
+    del params['Disparities'] [9]
+print 'new', params['Disparities']
+print 'new length', len(params['Disparities'])
+
+stimList = []
+for thisDisp in params['Disparities']:
+    stimList.append({'disps':thisDisp})
+
+print stimList
+
+trials = data.TrialHandler(stimList, params['No.Reps'], dataTypes = ['acc'], method='random', extraInfo=params)
+
+
+
+#DRAWING
+#warn if surround encroaching on fixation
+if crowding+(surroundsize/2)>=eccentricity and eccentricity >0.0 or (eccentricity+20)>=(((resY-5)*0.9)/2):
+    warningMessageL.draw()
+    warningMessageR.draw()
+    winL.flip()
+    winR.flip()
+    event.waitKeys()
+#Present initial message
+MessageL.draw()
+MessageR.draw()
+winL.flip()
+winR.flip()
+event.waitKeys()
+
+flipLeftFirst=True
+#function to determine order windows are flipped:
+def flipWins():
+    if flipLeftFirst==True:
+        winL.flip()
+        winR.flip()
+    elif flipLeftFirst==False:
+        winR.flip()
+        winL.flip()
+#Present nonius lines
+
+nonius()
+event.waitKeys()
+#testR.draw()
+#testL.draw()
+fusionL.draw()
+maskL.draw()
+fusionR.draw()
+maskR.draw()
+fixationL1.draw()
+fixationL2.draw()
+fixationR1.draw()
+fixationR2.draw()
+flipWins()
+event.waitKeys()
+
+
+#TRIAL FUNCTIONS
+def runTrialsStereoMOCS():
+    for thisTrial in trials:
+
+    #    Set centre and surround disparities
+        newDisp=thisTrial['disps']
+        newPosCentre=(newDisp/pixel)
+        CentreR.setPos([0.5*newPosCentre,vertShift])
+        CentreL.setPos([-0.5*newPosCentre,vertShift])
+    #    randomise ori elements
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        CentreL.setOri(randomOri)
+        CentreR.setOri(randomOri)
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        Surround1L.setOri(randomOri)
+        Surround1R.setOri(randomOri)
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        Surround2L.setOri(randomOri)
+        Surround2R.setOri(randomOri)
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        Surround3L.setOri(randomOri)
+        Surround3R.setOri(randomOri)
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        Surround4L.setOri(randomOri)
+        Surround4R.setOri(randomOri)
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        Surround5L.setOri(randomOri)
+        Surround5R.setOri(randomOri)
+        randomindex = num.random.uniform(0,1,size=1)
+        randomOri = randomindex*180
+        Surround6L.setOri(randomOri)
+        Surround6R.setOri(randomOri)
+    #    randomise phase elements
+        randomindex = num.random.uniform(0,1,size=1)
+        CentreL.setPhase(randomindex)
+        CentreR.setPhase(randomindex)
+        randomindex = num.random.uniform(0,1,size=1)
+        Surround1L.setPhase(randomindex)
+        Surround1R.setPhase(randomindex)
+        randomindex = num.random.uniform(0,1,size=1)
+        Surround2L.setPhase(randomindex)
+        Surround2R.setPhase(randomindex)
+        randomindex = num.random.uniform(0,1,size=1)
+        Surround3L.setPhase(randomindex)
+        Surround3R.setPhase(randomindex)
+        randomindex = num.random.uniform(0,1,size=1)
+        Surround4L.setPhase(randomindex)
+        Surround4R.setPhase(randomindex)
+        randomindex = num.random.uniform(0,1,size=1)
+        Surround5L.setPhase(randomindex)
+        Surround5R.setPhase(randomindex)
+        randomindex = num.random.uniform(0,1,size=1)
+        Surround6L.setPhase(randomindex)
+        Surround6R.setPhase(randomindex)
+        # Clear event
+        event.clearEvents()
+        corrSnd.play()
+    #    Display
+        trialClock=core.Clock()
+        trialClock.reset();t=0
+        while t<0.51:
+            t=trialClock.getTime()
+#            testR.draw()
+#            testL.draw()
+            fusionL.draw()
+            maskL.draw()
+            fusionR.draw()
+            maskR.draw()
+            if params['flankers']==1:
+                Surround1L.draw()
+                Surround2L.draw()
+                Surround3L.draw()
+                Surround4L.draw()
+                Surround5L.draw()
+                Surround6L.draw()
+                Surround1R.draw()
+                Surround2R.draw()
+                Surround3R.draw()
+                Surround4R.draw()
+                Surround5R.draw()
+                Surround6R.draw()
+            if eccentricity>1:
+                fixationL1.draw()
+                fixationL2.draw()
+                fixationR1.draw()
+                fixationR2.draw()
+            CentreL.draw()
+            CentreR.draw()
+            flipWins()
+
+#        print t
+
+        trialClock.reset();t=0
+        while t<0.2:
+            t=trialClock.getTime()
+#            testR.draw()
+#            testL.draw()
+            fusionL.draw()
+            maskL.draw()
+            fusionR.draw()
+            maskR.draw()
+            if eccentricity>1:
+                fixationL1.draw()
+                fixationL2.draw()
+                fixationR1.draw()
+                fixationR2.draw()
+            flipWins()
+        print t
+
+
+        keys=event.getKeys()
+        if len(keys)>0: 
+            thisResp = checkCorrect(keys)
+        #if no response yet wait for one
+        thisResp=None
+        while thisResp is None:
+            thisResp = checkCorrect(event.waitKeys())
+        #record response
+        trials.data.add('acc',thisResp)
+    
+
+#START TRIALS
+runTrialsStereoMOCS()
+
+
+#trials finished 
+winL.close()
+winR.close()
+
+########################################
+##save data	
+########################################
+
+baseName = '%s_%s_%s_%s_%s_%s' %(params['Observer'], 'stereo', params['eccentricity(deg)'],params['Crowding(deg)'],params['Depth of surround(secs)'],params['dateStr'])
+trials.saveAsText(fileName=baseName,stimOut =['disps'],dataOut =['acc_mean'],matrixOnly=True)
+trials.saveAsPickle(fileName=baseName)
+
+
+                                                                                                           

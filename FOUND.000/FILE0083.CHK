@@ -1,0 +1,118 @@
+                 ori=-30, contrast = 0.9, carrier=True)
+                                  
+        elif Condition =="ConcentricL":
+           LeftEye = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=0, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 8, visibleWedge=visWedge, contrast = LECarrierCont)
+    
+           RightEye = visual.spiralStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 0, visibleWedge=visWedge, contrast = RECarrierCont)
+    
+           Trigger = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=0, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 8, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9)
+                                  
+        elif Condition =="ConcentricR":
+           LeftEye = visual.spiralStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 0, visibleWedge=visWedge, contrast = contrast[0])
+        
+           RightEye = visual.RadialStim(winR,size=resY-SizeAdjust,angularCycles=0, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 8, visibleWedge=visWedge, contrast = RECarrierCont)
+                 
+           Trigger = visual.RadialStim(winR,size=resY-SizeAdjust,angularCycles=0, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 8, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9)
+    else: 
+        if Condition == "RadialL": # for displaying on sim
+            LeftEye = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
+                             units=units, radialCycles = 0, visibleWedge=visWedge, contrast=LECarrierCont)
+    
+            RightEye = spiralStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes = aRes,
+                              units=units, radialCycles=0, visibleWedge=visWedge, contrast = contrast[1])
+
+            Trigger = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=-1,angularRes=35,
+                              units="pix", radialCycles=0, visibleWedge=(0,60), 
+                              ori=-30, contrast = 0.9)
+
+        elif Condition == "RadialR":
+            LeftEye = spiralStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 0, visibleWedge=visWedge, contrast = contrast[0])
+        
+            RightEye = visual.RadialStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 0, visibleWedge=visWedge, contrast = RECarrierCont)
+    
+            Trigger = visual.RadialStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 0, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9)
+                                  
+        elif Condition == "SpiralL":
+            LeftEye = spiralStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 0, visibleWedge=visWedge, contrast = LECarrierCont, carrier=True)
+        
+            RightEye = spiralStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 0, visibleWedge=visWedge, contrast = contrast[1])
+    
+            Trigger = spiralStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 0, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9, carrier=True)
+                                  
+        elif Condition == "SpiralR":
+            LeftEye = spiralStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 0, visibleWedge=visWedge, contrast = contrast[0])
+        
+            RightEye = spiralStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 0, visibleWedge=visWedge, contrast = RECarrierCont, carrier=True)
+    
+            Trigger = spiralStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 0, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9, carrier=True)
+                                  
+        elif Condition =="ConcentricL":
+            LeftEye = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=0, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 8, visibleWedge=visWedge, contrast = LECarrierCont)
+    
+            RightEye = spiralStim(winR,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 0, visibleWedge=visWedge, contrast = RECarrierCont)
+    
+            Trigger = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=0, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 8, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9)
+                                  
+        elif Condition =="ConcentricR":
+            LeftEye = spiralStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
+                                 units=units, radialCycles = 0, visibleWedge=visWedge, contrast = contrast[0])
+        
+            RightEye = visual.RadialStim(winR,size=resY-SizeAdjust,angularCycles=0, color=c, angularRes = aRes,
+                                  units=units, radialCycles= 8, visibleWedge=visWedge, contrast = RECarrierCont)
+                 
+            Trigger = visual.RadialStim(winR,size=resY-SizeAdjust,angularCycles=0, color=-1,angularRes=35,
+                                  units="pix", radialCycles = 8, visibleWedge = (0,60), 
+                                  ori=-30, contrast = 0.9)
+    
+    maskL = visual.RadialStim(winL,color=[0,0,0],size=(resY-SizeAdjust)*0.745,
+                              angularCycles=aCycles,angularRes=aRes,units=units)
+    
+    maskR = visual.RadialStim(winR,color=[0,0,0],size=(resY-SizeAdjust)*0.76,
+                              angularCycles=aCycles,angularRes=aRes,units=units)
+    
+    return LeftEye, maskL, RightEye, maskR, Trigger
+
+    """
+    # creates radial patches and returns the radial stim, concentric stim 
+    # and masks for L and R (using modern syntax and more recent stim locations.)
+    # tmp comment to simplify then will copy over from above
+    # """
+    # psychopy.plugins.activatePlugins() # needed for modern version
+    # from psychopy import RadialStim
+    # RadL = visual.RadialStim(winL,size=resY-175,angularCycles=aCycles, color=c, angularRes=aRes, units=units, radialCycles = 0, contrast = contrast[0])
+    # maskL = visual.RadialStim(winL,color=[0,0,0],size=(resY-175)*0.745,angularCycles=aCycles,angularRes=aRes,units=units)
+    # ConcR = visual.RadialStim(winR,size=resY-175,angularCycles=0, color=c, angularRes = aRes,units=units, radialCycles= 8, ori=300, contrast = contrast[1]) 
+    # maskR = visual.RadialStim(winR,color=[0,0,0],size=(resY-175)*0.76,angularCycles=aCycles,angularRes=aRes,units=units)
+    # return RadL, maskL, ConcR, maskR
+
+LeftEye, maskL, RightEye, maskR, Trigger = createRadialStim(winL, winR, resY, Condition = "ConcentricL")
+
+# End location
+
+EndLocL2 = visual.PatchStim(winL, tex='None', units='pix', pos=[-140,-420], size=(7,60), color=[-1,-1,-1], ori=200)
+EndLocL1 = visual.PatchStim(winL, tex='None', units='pix', pos=[140,-420], size=(7,60), color=[-1,-1,-1], ori=340)
+EndLocR2 = visual.PatchStim(winR, tex='None', units='pix', pos=[-140,-420], size=(7,60), color=[-1,-1,-1], ori=200

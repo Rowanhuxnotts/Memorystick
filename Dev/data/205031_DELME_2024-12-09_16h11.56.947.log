@@ -1,0 +1,19 @@
+19.4892 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [1920, 1080]. Using actual size
+20.5773 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000029543AE3CA0>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000029543AE3C40>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000029543AE3A60>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x0000029545D11C70>, multiSample=False, name='window1', numSamples=2, pos=(0, 0), screen=0, size=array([1920, 1080]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+20.5775 	EXP 	window1: mouseVisible = True
+20.5775 	EXP 	window1: backgroundImage = ''
+20.5775 	EXP 	window1: backgroundFit = 'none'
+20.5801 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+20.5801 	EXP 	window1: recordFrameIntervals = False
+20.7429 	EXP 	window1: recordFrameIntervals = True
+20.9266 	EXP 	Screen (0) actual frame rate measured at 60.03Hz
+20.9267 	EXP 	window1: recordFrameIntervals = False
+20.9269 	EXP 	window1: mouseVisible = False
+26.3376 	EXP 	DELME: status = STARTED
+26.3380 	EXP 	window1: mouseVisible = True
+26.3411 	EXP 	Created grating = GratingStim(__class__=<class 'psychopy.visual.grating.GratingStim'>, anchor='center', autoDraw=False, autoLog=True, blendmode='avg', color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, interpolate=True, mask='gauss', maskParams=None, name='grating', opacity=1.0, ori=0.0, phase=array([0., 0.]), pos=array([0., 0.]), rgbPedestal=array([0., 0., 0.]), sf=array([1., 1.]), size=array([0.5, 0.5]), tex='sin', texRes=128.0, units='height', win=Window(...))
+0.0146 	EXP 	grating: autoDraw = True
+0.0146 	EXP 	grating: tex = 'sin'
+1.0176 	EXP 	grating: autoDraw = False
+1.0177 	EXP 	DELME: status = STOPPED
+1.1778 	EXP 	window1: mouseVisible = True
