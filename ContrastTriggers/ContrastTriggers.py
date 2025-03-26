@@ -45,10 +45,10 @@ Clock = core.Clock()
 #--------------------------------------
 
 #Create stimlui initial stimuli
-RadL = visual.RadialStim(winL,size=resY-350, angularCycles=25, color=-1,angularRes=35,units="pix", radialCycles = 0, contrast = 0.7)
-maskL = visual.RadialStim(winL,color=[0,0,0],size=(resY-350)*0.745,angularCycles=25,angularRes=35,units="pix")
-ConcR = visual.RadialStim(winR,size=resY-350,angularCycles=0, color=-1,angularRes=35,units="pix", radialCycles= 8, ori=300, contrast = 0.45)
-maskR = visual.RadialStim(winR,color=[0,0,0],size=(resY-350)*0.76,angularCycles=25,angularRes=35,units="pix")
+RadLTop = visual.RadialStim(winL,size=resY-350, angularCycles=25, color=-1,angularRes=35,units="pix", radialCycles = 0, contrast = 0.8)
+RadLBot = visual.RadialStim(winL,size=resY-350, angularCycles=25, color=-1,angularRes=35,units="pix", radialCycles = 0, contrast = 0.8)
+ConcRTop = visual.RadialStim(winR,size=resY-350,angularCycles=0, color=-1,angularRes=35,units="pix", radialCycles= 8, ori=300, contrast = 0.8)
+ConcRBot = visual.RadialStim(winR,size=resY-350,angularCycles=0, color=-1,angularRes=35,units="pix", radialCycles= 8, ori=300, contrast = 0.8)
 
 # End location
 

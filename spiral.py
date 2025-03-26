@@ -1,7 +1,8 @@
 from psychopy import visual
 class spiralStim(visual.PatchStim):
-    """Stimulus object for drawing radial stimuli, like an annulus, a rotating wedge,
+    """Stimulus object for drawing spiral stimuli, like an annulus, a rotating wedge,
     a checkerboard etc...
+    Built upon the radialStim class.
 
     Ideal for fMRI retinotopy stimuli!
 

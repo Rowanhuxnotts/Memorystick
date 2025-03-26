@@ -131,7 +131,7 @@ winR = visual.Window(size=(resX,resY),
 
 # Clock
 Clock = core.Clock()
-
+ResponseClock = core.Clock()
 #--------------------------------------
 #            Create stimlui 
 #--------------------------------------
@@ -153,8 +153,8 @@ def createRadialStim(winL, winR, resY, aCycles = 27, c=-1, aRes = 35, units="pix
     # Refused to take the contrast[0] as a float without this...
     LECont = float(contrast[0])
     RECont = float(contrast[1])
-    LECarrierCont = (LECont / 100) * 60
-    RECarrierCont = (RECont / 100) * 60
+    LECarrierCont = (LECont / 100) * 70
+    RECarrierCont = (RECont / 100) * 70
     if simulationMode == False: # When in simulation mode a different module is used
         if Condition == "RadialL": # for displaying on lab
            LeftEye = visual.RadialStim(winL,size=resY-SizeAdjust,angularCycles=aCycles, color=c, angularRes=aRes, 
@@ -404,6 +404,7 @@ ResponseTime = []
 StimOrientation = []
 IsOddBall = []
 WaveSpeeds = []
+Keys = []
 
 BreakNum = 0
 OddballRand = rand.randint(5, 7)
@@ -483,6 +484,13 @@ for y in Exp:
     winR.flip()
 
     Keys = event.waitKeys()
+
+#    Keys = []
+#    while Keys == [] and Clock.getTime() < 3:
+#        Keys = event.getKeys()
+#    print(Keys)
+#    if Keys == []:
+#        Keys.append("Left")
 
 # Add data from trial
     RespTime = Clock.getTime()
@@ -580,6 +588,7 @@ for y in Exp:
             x.draw()        
         winL.flip()
         winR.flip()
+        Clock.reset() # Start timing
         time.sleep(0.25)
 
 # Set wave speed based on average travel time in each condition
@@ -590,7 +599,6 @@ for y in Exp:
         elif y[0] == 'C':
             WedgeSize = 180 * mean(ConcAvSpeed)
         
-        Clock.reset() # Start timing
         Keys = []
         while Keys == []:
             a = WedgeSize*Clock.getTime()

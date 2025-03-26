@@ -1,0 +1,571 @@
+37.9888 	INFO 	Loaded monitor calibration from ['2024_07_05 16:35']
+38.0642 	WARNING 	User requested fullscreen with size [1536  864], but screen is actually [1920, 1080]. Using actual size
+39.5302 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x00000258242D5CF0>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x00000258242D5C90>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=True, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000002582EA2D390>, multiSample=False, name='window1', numSamples=2, pos=[0.0, 0.0], screen=0, size=array([1920, 1080]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+39.5304 	EXP 	window1: backgroundImage = ''
+39.5304 	EXP 	window1: backgroundFit = 'none'
+39.7001 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+39.7001 	EXP 	window1: recordFrameIntervals = False
+39.8332 	EXP 	window1: recordFrameIntervals = True
+40.0167 	EXP 	Screen (0) actual frame rate measured at 60.06Hz
+40.0167 	EXP 	window1: recordFrameIntervals = False
+44.9759 	INFO 	keyboard.Keyboard is using iohub backend.
+44.9759 	INFO 	keyboard.Keyboard is using iohub backend.
+44.9760 	INFO 	keyboard.Keyboard is using iohub backend.
+44.9760 	INFO 	keyboard.Keyboard is using iohub backend.
+44.9760 	INFO 	keyboard.Keyboard is using iohub backend.
+44.9760 	EXP 	ContrastSen: status = STARTED
+45.2394 	EXP 	Created Instructions = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='Instructions', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+45.2500 	EXP 	Created Arrow = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-1.0, draggable=False, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='Arrow', opacity=1, ori=1.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+45.2569 	EXP 	Created Change_eye = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='Change_eye', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+45.2580 	EXP 	Created Arrow2 = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-1.0, draggable=False, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='Arrow2', opacity=1, ori=1.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+0.1286 	INFO 	Keyboard events cleared
+0.1279 	EXP 	Instructions: autoDraw = True
+16.9197 	DATA 	Keypress: space
+16.9233 	INFO 	Keyboard events cleared
+16.9225 	EXP 	Instructions: autoDraw = False
+16.9225 	EXP 	Arrow: ori = 180.0
+16.9225 	EXP 	Arrow: autoDraw = True
+17.9124 	DATA 	Keypress: down
+17.9432 	INFO 	Keyboard events cleared
+17.9419 	EXP 	Arrow: autoDraw = False
+17.9419 	EXP 	Arrow: ori = 180.0
+17.9419 	EXP 	Arrow: autoDraw = True
+18.8148 	DATA 	Keypress: down
+18.8257 	INFO 	Keyboard events cleared
+18.8249 	EXP 	Arrow: autoDraw = False
+18.8249 	EXP 	Arrow: ori = 90.0
+18.8249 	EXP 	Arrow: autoDraw = True
+19.6290 	DATA 	Keypress: right
+19.6418 	INFO 	Keyboard events cleared
+19.6414 	EXP 	Arrow: autoDraw = False
+19.6414 	EXP 	Arrow: ori = 0.0
+19.6414 	EXP 	Arrow: autoDraw = True
+21.4461 	DATA 	Keypress: up
+21.4760 	INFO 	Keyboard events cleared
+21.4748 	EXP 	Arrow: autoDraw = False
+21.4748 	EXP 	Arrow: ori = 180.0
+21.4748 	EXP 	Arrow: autoDraw = True
+30.0959 	DATA 	Keypress: left
+30.1264 	INFO 	Keyboard events cleared
+30.1250 	EXP 	Arrow: autoDraw = False
+30.1250 	EXP 	Arrow: ori = 180.0
+30.1250 	EXP 	Arrow: autoDraw = True
+35.5500 	DATA 	Keypress: up
+35.5592 	INFO 	Keyboard events cleared
+35.5580 	EXP 	Arrow: autoDraw = False
+35.5580 	EXP 	Arrow: ori = 90.0
+35.5580 	EXP 	Arrow: autoDraw = True
+37.4329 	DATA 	Keypress: right
+37.4429 	INFO 	Keyboard events cleared
+37.4415 	EXP 	Arrow: autoDraw = False
+37.4415 	EXP 	Arrow: ori = 180.0
+37.4415 	EXP 	Arrow: autoDraw = True
+38.2482 	DATA 	Keypress: down
+38.2595 	INFO 	Keyboard events cleared
+38.2581 	EXP 	Arrow: autoDraw = False
+38.2581 	EXP 	Arrow: ori = 90.0
+38.2581 	EXP 	Arrow: autoDraw = True
+38.8780 	DATA 	Keypress: right
+38.8809 	INFO 	Keyboard events cleared
+38.8804 	EXP 	Arrow: autoDraw = False
+38.8804 	EXP 	Arrow: ori = 270.0
+38.8804 	EXP 	Arrow: autoDraw = True
+40.2470 	DATA 	Keypress: down
+40.2592 	INFO 	Keyboard events cleared
+40.2580 	EXP 	Arrow: autoDraw = False
+40.2580 	EXP 	Arrow: ori = 180.0
+40.2580 	EXP 	Arrow: autoDraw = True
+41.6982 	DATA 	Keypress: down
+41.7094 	INFO 	Keyboard events cleared
+41.7081 	EXP 	Arrow: autoDraw = False
+41.7081 	EXP 	Arrow: ori = 0.0
+41.7081 	EXP 	Arrow: autoDraw = True
+42.8139 	DATA 	Keypress: right
+42.8256 	INFO 	Keyboard events cleared
+42.8246 	EXP 	Arrow: autoDraw = False
+42.8246 	EXP 	Arrow: ori = 0.0
+42.8246 	EXP 	Arrow: autoDraw = True
+45.1982 	DATA 	Keypress: up
+45.2093 	INFO 	Keyboard events cleared
+45.2081 	EXP 	Arrow: autoDraw = False
+45.2081 	EXP 	Arrow: ori = 0.0
+45.2081 	EXP 	Arrow: autoDraw = True
+46.4788 	DATA 	Keypress: up
+46.4916 	INFO 	Keyboard events cleared
+46.4908 	EXP 	Arrow: autoDraw = False
+46.4908 	EXP 	Arrow: ori = 90.0
+46.4908 	EXP 	Arrow: autoDraw = True
+47.1825 	DATA 	Keypress: right
+47.1925 	INFO 	Keyboard events cleared
+47.1912 	EXP 	Arrow: autoDraw = False
+47.1912 	EXP 	Arrow: ori = 0.0
+47.1912 	EXP 	Arrow: autoDraw = True
+47.8625 	DATA 	Keypress: up
+47.8926 	INFO 	Keyboard events cleared
+47.8912 	EXP 	Arrow: autoDraw = False
+47.8912 	EXP 	Arrow: ori = 0.0
+47.8912 	EXP 	Arrow: autoDraw = True
+49.7316 	DATA 	Keypress: up
+49.7427 	INFO 	Keyboard events cleared
+49.7413 	EXP 	Arrow: autoDraw = False
+49.7413 	EXP 	Arrow: ori = 0.0
+49.7413 	EXP 	Arrow: autoDraw = True
+50.8653 	DATA 	Keypress: up
+50.8755 	INFO 	Keyboard events cleared
+50.8745 	EXP 	Arrow: autoDraw = False
+50.8745 	EXP 	Arrow: ori = 270.0
+50.8745 	EXP 	Arrow: autoDraw = True
+51.8639 	DATA 	Keypress: left
+51.8751 	INFO 	Keyboard events cleared
+51.8742 	EXP 	Arrow: autoDraw = False
+51.8742 	EXP 	Arrow: ori = 180.0
+51.8742 	EXP 	Arrow: autoDraw = True
+52.8655 	DATA 	Keypress: down
+52.8752 	INFO 	Keyboard events cleared
+52.8741 	EXP 	Arrow: autoDraw = False
+52.8741 	EXP 	Arrow: ori = 90.0
+52.8741 	EXP 	Arrow: autoDraw = True
+54.1268 	DATA 	Keypress: right
+54.1410 	INFO 	Keyboard events cleared
+54.1406 	EXP 	Arrow: autoDraw = False
+54.1406 	EXP 	Arrow: ori = 0.0
+54.1406 	EXP 	Arrow: autoDraw = True
+56.3974 	DATA 	Keypress: up
+56.4086 	INFO 	Keyboard events cleared
+56.4075 	EXP 	Arrow: autoDraw = False
+56.4075 	EXP 	Arrow: ori = 90.0
+56.4075 	EXP 	Arrow: autoDraw = True
+57.8821 	DATA 	Keypress: right
+57.8924 	INFO 	Keyboard events cleared
+57.8910 	EXP 	Arrow: autoDraw = False
+57.8910 	EXP 	Arrow: ori = 90.0
+57.8910 	EXP 	Arrow: autoDraw = True
+59.6297 	DATA 	Keypress: right
+59.6411 	INFO 	Keyboard events cleared
+59.6405 	EXP 	Arrow: autoDraw = False
+59.6405 	EXP 	Arrow: ori = 180.0
+59.6405 	EXP 	Arrow: autoDraw = True
+64.7982 	DATA 	Keypress: down
+64.8090 	INFO 	Keyboard events cleared
+64.8076 	EXP 	Arrow: autoDraw = False
+64.8076 	EXP 	Arrow: ori = 270.0
+64.8076 	EXP 	Arrow: autoDraw = True
+68.5820 	DATA 	Keypress: up
+68.5918 	INFO 	Keyboard events cleared
+68.5906 	EXP 	Arrow: autoDraw = False
+68.5906 	EXP 	Arrow: ori = 270.0
+68.5906 	EXP 	Arrow: autoDraw = True
+71.1130 	DATA 	Keypress: left
+71.1254 	INFO 	Keyboard events cleared
+71.1241 	EXP 	Arrow: autoDraw = False
+71.1241 	EXP 	Arrow: ori = 180.0
+71.1241 	EXP 	Arrow: autoDraw = True
+73.5769 	DATA 	Keypress: down
+73.5909 	INFO 	Keyboard events cleared
+73.5903 	EXP 	Arrow: autoDraw = False
+73.5903 	EXP 	Arrow: ori = 90.0
+73.5903 	EXP 	Arrow: autoDraw = True
+77.8114 	DATA 	Keypress: up
+77.8423 	INFO 	Keyboard events cleared
+77.8409 	EXP 	Arrow: autoDraw = False
+77.8409 	EXP 	Arrow: ori = 180.0
+77.8409 	EXP 	Arrow: autoDraw = True
+81.8803 	DATA 	Keypress: down
+81.8918 	INFO 	Keyboard events cleared
+81.8906 	EXP 	Arrow: autoDraw = False
+81.8906 	EXP 	Arrow: ori = 0.0
+81.8906 	EXP 	Arrow: autoDraw = True
+84.5272 	DATA 	Keypress: up
+84.5408 	INFO 	Keyboard events cleared
+84.5401 	EXP 	Arrow: autoDraw = False
+84.5401 	EXP 	Arrow: ori = 0.0
+84.5401 	EXP 	Arrow: autoDraw = True
+86.3476 	DATA 	Keypress: up
+86.3584 	INFO 	Keyboard events cleared
+86.3570 	EXP 	Arrow: autoDraw = False
+86.3570 	EXP 	Arrow: ori = 180.0
+86.3570 	EXP 	Arrow: autoDraw = True
+91.4132 	DATA 	Keypress: down
+91.4239 	INFO 	Keyboard events cleared
+91.4232 	EXP 	Arrow: autoDraw = False
+91.4232 	EXP 	Arrow: ori = 0.0
+91.4232 	EXP 	Arrow: autoDraw = True
+93.6624 	DATA 	Keypress: up
+93.6745 	INFO 	Keyboard events cleared
+93.6734 	EXP 	Arrow: autoDraw = False
+93.6734 	EXP 	Arrow: ori = 0.0
+93.6734 	EXP 	Arrow: autoDraw = True
+95.9819 	DATA 	Keypress: right
+95.9911 	INFO 	Keyboard events cleared
+95.9900 	EXP 	Arrow: autoDraw = False
+95.9900 	EXP 	Arrow: ori = 270.0
+95.9900 	EXP 	Arrow: autoDraw = True
+98.2309 	DATA 	Keypress: left
+98.2412 	INFO 	Keyboard events cleared
+98.2401 	EXP 	Arrow: autoDraw = False
+98.2401 	EXP 	Arrow: ori = 180.0
+98.2401 	EXP 	Arrow: autoDraw = True
+103.0801 	DATA 	Keypress: up
+103.0910 	INFO 	Keyboard events cleared
+103.0900 	EXP 	Arrow: autoDraw = False
+103.0900 	EXP 	Arrow: ori = 270.0
+103.0900 	EXP 	Arrow: autoDraw = True
+105.7322 	DATA 	Keypress: left
+105.7412 	INFO 	Keyboard events cleared
+105.7398 	EXP 	Arrow: autoDraw = False
+105.7398 	EXP 	Arrow: ori = 180.0
+105.7398 	EXP 	Arrow: autoDraw = True
+106.8627 	DATA 	Keypress: down
+106.8744 	INFO 	Keyboard events cleared
+106.8734 	EXP 	Arrow: autoDraw = False
+106.8734 	EXP 	Arrow: ori = 180.0
+106.8734 	EXP 	Arrow: autoDraw = True
+108.4827 	DATA 	Keypress: down
+108.4910 	INFO 	Keyboard events cleared
+108.4898 	EXP 	Arrow: autoDraw = False
+108.4898 	EXP 	Arrow: ori = 0.0
+108.4898 	EXP 	Arrow: autoDraw = True
+110.7120 	DATA 	Keypress: up
+110.7237 	INFO 	Keyboard events cleared
+110.7228 	EXP 	Arrow: autoDraw = False
+110.7228 	EXP 	Arrow: ori = 0.0
+110.7228 	EXP 	Arrow: autoDraw = True
+114.8481 	DATA 	Keypress: up
+114.8571 	INFO 	Keyboard events cleared
+114.8562 	EXP 	Arrow: autoDraw = False
+114.8562 	EXP 	Arrow: ori = 180.0
+114.8562 	EXP 	Arrow: autoDraw = True
+117.5472 	DATA 	Keypress: down
+117.5574 	INFO 	Keyboard events cleared
+117.5563 	EXP 	Arrow: autoDraw = False
+117.5563 	EXP 	Arrow: ori = 90.0
+117.5563 	EXP 	Arrow: autoDraw = True
+121.7762 	DATA 	Keypress: right
+121.7900 	INFO 	Keyboard events cleared
+121.7892 	EXP 	Arrow: autoDraw = False
+121.7892 	EXP 	Arrow: ori = 90.0
+121.7892 	EXP 	Arrow: autoDraw = True
+128.6813 	DATA 	Keypress: left
+128.6907 	INFO 	Keyboard events cleared
+128.6892 	EXP 	Arrow: autoDraw = False
+128.6892 	EXP 	Arrow: ori = 90.0
+128.6892 	EXP 	Arrow: autoDraw = True
+132.3299 	DATA 	Keypress: left
+132.3408 	INFO 	Keyboard events cleared
+132.3394 	EXP 	Arrow: autoDraw = False
+132.3394 	EXP 	Arrow: ori = 0.0
+132.3394 	EXP 	Arrow: autoDraw = True
+133.9124 	DATA 	Keypress: up
+133.9242 	INFO 	Keyboard events cleared
+133.9227 	EXP 	Arrow: autoDraw = False
+133.9227 	EXP 	Arrow: ori = 90.0
+133.9227 	EXP 	Arrow: autoDraw = True
+134.8801 	DATA 	Keypress: right
+134.8894 	INFO 	Keyboard events cleared
+134.8888 	EXP 	Arrow: autoDraw = False
+134.8888 	EXP 	Arrow: ori = 90.0
+134.8888 	EXP 	Arrow: autoDraw = True
+137.9292 	DATA 	Keypress: right
+137.9404 	INFO 	Keyboard events cleared
+137.9392 	EXP 	Arrow: autoDraw = False
+137.9392 	EXP 	Arrow: ori = 180.0
+137.9392 	EXP 	Arrow: autoDraw = True
+141.0781 	DATA 	Keypress: down
+141.1067 	INFO 	Keyboard events cleared
+141.1056 	EXP 	Arrow: autoDraw = False
+141.1056 	EXP 	Change_eye: autoDraw = True
+150.7795 	DATA 	Keypress: space
+150.7901 	INFO 	Keyboard events cleared
+150.7890 	EXP 	Change_eye: autoDraw = False
+150.7890 	EXP 	Arrow2: ori = 180.0
+150.7890 	EXP 	Arrow2: autoDraw = True
+153.0775 	DATA 	Keypress: down
+153.0897 	INFO 	Keyboard events cleared
+153.0887 	EXP 	Arrow2: autoDraw = False
+153.0887 	EXP 	Arrow2: ori = 90.0
+153.0887 	EXP 	Arrow2: autoDraw = True
+153.7948 	DATA 	Keypress: right
+153.8054 	INFO 	Keyboard events cleared
+153.8050 	EXP 	Arrow2: autoDraw = False
+153.8050 	EXP 	Arrow2: ori = 0.0
+153.8050 	EXP 	Arrow2: autoDraw = True
+154.5769 	DATA 	Keypress: up
+154.5897 	INFO 	Keyboard events cleared
+154.5888 	EXP 	Arrow2: autoDraw = False
+154.5888 	EXP 	Arrow2: ori = 270.0
+154.5888 	EXP 	Arrow2: autoDraw = True
+155.8587 	DATA 	Keypress: left
+155.8726 	INFO 	Keyboard events cleared
+155.8719 	EXP 	Arrow2: autoDraw = False
+155.8719 	EXP 	Arrow2: ori = 0.0
+155.8719 	EXP 	Arrow2: autoDraw = True
+162.0756 	DATA 	Keypress: up
+162.1060 	INFO 	Keyboard events cleared
+162.1051 	EXP 	Arrow2: autoDraw = False
+162.1051 	EXP 	Arrow2: ori = 180.0
+162.1051 	EXP 	Arrow2: autoDraw = True
+167.0797 	DATA 	Keypress: left
+167.0898 	INFO 	Keyboard events cleared
+167.0885 	EXP 	Arrow2: autoDraw = False
+167.0885 	EXP 	Arrow2: ori = 270.0
+167.0885 	EXP 	Arrow2: autoDraw = True
+171.0795 	DATA 	Keypress: left
+171.0897 	INFO 	Keyboard events cleared
+171.0885 	EXP 	Arrow2: autoDraw = False
+171.0885 	EXP 	Arrow2: ori = 90.0
+171.0885 	EXP 	Arrow2: autoDraw = True
+175.1621 	DATA 	Keypress: right
+175.1729 	INFO 	Keyboard events cleared
+175.1717 	EXP 	Arrow2: autoDraw = False
+175.1717 	EXP 	Arrow2: ori = 180.0
+175.1717 	EXP 	Arrow2: autoDraw = True
+181.1944 	DATA 	Keypress: down
+181.2061 	INFO 	Keyboard events cleared
+181.2051 	EXP 	Arrow2: autoDraw = False
+181.2051 	EXP 	Arrow2: ori = 270.0
+181.2051 	EXP 	Arrow2: autoDraw = True
+184.8452 	DATA 	Keypress: left
+184.8562 	INFO 	Keyboard events cleared
+184.8550 	EXP 	Arrow2: autoDraw = False
+184.8550 	EXP 	Arrow2: ori = 90.0
+184.8550 	EXP 	Arrow2: autoDraw = True
+190.4800 	DATA 	Keypress: up
+190.4888 	INFO 	Keyboard events cleared
+190.4879 	EXP 	Arrow2: autoDraw = False
+190.4879 	EXP 	Arrow2: ori = 270.0
+190.4879 	EXP 	Arrow2: autoDraw = True
+197.1232 	DATA 	Keypress: right
+197.1378 	INFO 	Keyboard events cleared
+197.1374 	EXP 	Arrow2: autoDraw = False
+197.1374 	EXP 	Arrow2: ori = 90.0
+197.1374 	EXP 	Arrow2: autoDraw = True
+204.6755 	DATA 	Keypress: up
+204.6882 	INFO 	Keyboard events cleared
+204.6874 	EXP 	Arrow2: autoDraw = False
+204.6874 	EXP 	Arrow2: ori = 180.0
+204.6874 	EXP 	Arrow2: autoDraw = True
+212.8108 	DATA 	Keypress: left
+212.8217 	INFO 	Keyboard events cleared
+212.8206 	EXP 	Arrow2: autoDraw = False
+212.8206 	EXP 	Arrow2: ori = 270.0
+212.8206 	EXP 	Arrow2: autoDraw = True
+216.0803 	DATA 	Keypress: left
+216.0885 	INFO 	Keyboard events cleared
+216.0874 	EXP 	Arrow2: autoDraw = False
+216.0874 	EXP 	Arrow2: ori = 180.0
+216.0874 	EXP 	Arrow2: autoDraw = True
+219.8940 	DATA 	Keypress: down
+219.9057 	INFO 	Keyboard events cleared
+219.9042 	EXP 	Arrow2: autoDraw = False
+219.9042 	EXP 	Arrow2: ori = 180.0
+219.9042 	EXP 	Arrow2: autoDraw = True
+224.6462 	DATA 	Keypress: left
+224.6541 	INFO 	Keyboard events cleared
+224.6535 	EXP 	Arrow2: autoDraw = False
+224.6535 	EXP 	Arrow2: ori = 90.0
+224.6535 	EXP 	Arrow2: autoDraw = True
+231.5760 	DATA 	Keypress: left
+231.5884 	INFO 	Keyboard events cleared
+231.5871 	EXP 	Arrow2: autoDraw = False
+231.5871 	EXP 	Arrow2: ori = 0.0
+231.5871 	EXP 	Arrow2: autoDraw = True
+233.3233 	DATA 	Keypress: up
+233.3371 	INFO 	Keyboard events cleared
+233.3367 	EXP 	Arrow2: autoDraw = False
+233.3367 	EXP 	Arrow2: ori = 180.0
+233.3367 	EXP 	Arrow2: autoDraw = True
+234.9276 	DATA 	Keypress: right
+234.9385 	INFO 	Keyboard events cleared
+234.9372 	EXP 	Arrow2: autoDraw = False
+234.9372 	EXP 	Arrow2: ori = 270.0
+234.9372 	EXP 	Arrow2: autoDraw = True
+235.8269 	DATA 	Keypress: left
+235.8386 	INFO 	Keyboard events cleared
+235.8372 	EXP 	Arrow2: autoDraw = False
+235.8372 	EXP 	Arrow2: ori = 90.0
+235.8372 	EXP 	Arrow2: autoDraw = True
+236.4597 	DATA 	Keypress: right
+236.4718 	INFO 	Keyboard events cleared
+236.4705 	EXP 	Arrow2: autoDraw = False
+236.4705 	EXP 	Arrow2: ori = 180.0
+236.4705 	EXP 	Arrow2: autoDraw = True
+236.9934 	DATA 	Keypress: down
+237.0052 	INFO 	Keyboard events cleared
+237.0038 	EXP 	Arrow2: autoDraw = False
+237.0038 	EXP 	Arrow2: ori = 270.0
+237.0038 	EXP 	Arrow2: autoDraw = True
+237.6144 	DATA 	Keypress: left
+237.6203 	INFO 	Keyboard events cleared
+237.6198 	EXP 	Arrow2: autoDraw = False
+237.6198 	EXP 	Arrow2: ori = 0.0
+237.6198 	EXP 	Arrow2: autoDraw = True
+238.2278 	DATA 	Keypress: up
+238.2381 	INFO 	Keyboard events cleared
+238.2370 	EXP 	Arrow2: autoDraw = False
+238.2370 	EXP 	Arrow2: ori = 0.0
+238.2370 	EXP 	Arrow2: autoDraw = True
+239.3927 	DATA 	Keypress: up
+239.4208 	INFO 	Keyboard events cleared
+239.4199 	EXP 	Arrow2: autoDraw = False
+239.4199 	EXP 	Arrow2: ori = 0.0
+239.4199 	EXP 	Arrow2: autoDraw = True
+241.5258 	DATA 	Keypress: up
+241.5379 	INFO 	Keyboard events cleared
+241.5368 	EXP 	Arrow2: autoDraw = False
+241.5368 	EXP 	Arrow2: ori = 180.0
+241.5368 	EXP 	Arrow2: autoDraw = True
+242.6938 	DATA 	Keypress: left
+242.7047 	INFO 	Keyboard events cleared
+242.7035 	EXP 	Arrow2: autoDraw = False
+242.7035 	EXP 	Arrow2: ori = 90.0
+242.7035 	EXP 	Arrow2: autoDraw = True
+245.4105 	DATA 	Keypress: right
+245.4215 	INFO 	Keyboard events cleared
+245.4201 	EXP 	Arrow2: autoDraw = False
+245.4201 	EXP 	Arrow2: ori = 0.0
+245.4201 	EXP 	Arrow2: autoDraw = True
+246.1270 	DATA 	Keypress: up
+246.1381 	INFO 	Keyboard events cleared
+246.1367 	EXP 	Arrow2: autoDraw = False
+246.1367 	EXP 	Arrow2: ori = 180.0
+246.1367 	EXP 	Arrow2: autoDraw = True
+246.7945 	DATA 	Keypress: down
+246.8046 	INFO 	Keyboard events cleared
+246.8034 	EXP 	Arrow2: autoDraw = False
+246.8034 	EXP 	Arrow2: ori = 270.0
+246.8034 	EXP 	Arrow2: autoDraw = True
+247.4267 	DATA 	Keypress: left
+247.4380 	INFO 	Keyboard events cleared
+247.4368 	EXP 	Arrow2: autoDraw = False
+247.4368 	EXP 	Arrow2: ori = 270.0
+247.4368 	EXP 	Arrow2: autoDraw = True
+248.5110 	DATA 	Keypress: left
+248.5214 	INFO 	Keyboard events cleared
+248.5202 	EXP 	Arrow2: autoDraw = False
+248.5202 	EXP 	Arrow2: ori = 270.0
+248.5202 	EXP 	Arrow2: autoDraw = True
+250.1087 	DATA 	Keypress: left
+250.1215 	INFO 	Keyboard events cleared
+250.1202 	EXP 	Arrow2: autoDraw = False
+250.1202 	EXP 	Arrow2: ori = 0.0
+250.1202 	EXP 	Arrow2: autoDraw = True
+251.2596 	DATA 	Keypress: up
+251.2878 	INFO 	Keyboard events cleared
+251.2867 	EXP 	Arrow2: autoDraw = False
+251.2867 	EXP 	Arrow2: ori = 90.0
+251.2867 	EXP 	Arrow2: autoDraw = True
+254.1092 	DATA 	Keypress: right
+254.1205 	INFO 	Keyboard events cleared
+254.1196 	EXP 	Arrow2: autoDraw = False
+254.1196 	EXP 	Arrow2: ori = 90.0
+254.1196 	EXP 	Arrow2: autoDraw = True
+255.5465 	DATA 	Keypress: right
+255.5538 	INFO 	Keyboard events cleared
+255.5529 	EXP 	Arrow2: autoDraw = False
+255.5529 	EXP 	Arrow2: ori = 180.0
+255.5529 	EXP 	Arrow2: autoDraw = True
+258.0722 	DATA 	Keypress: down
+258.0867 	INFO 	Keyboard events cleared
+258.0861 	EXP 	Arrow2: autoDraw = False
+258.0861 	EXP 	Arrow2: ori = 180.0
+258.0861 	EXP 	Arrow2: autoDraw = True
+259.0075 	DATA 	Keypress: down
+259.0208 	INFO 	Keyboard events cleared
+259.0198 	EXP 	Arrow2: autoDraw = False
+259.0198 	EXP 	Arrow2: ori = 180.0
+259.0198 	EXP 	Arrow2: autoDraw = True
+260.5793 	DATA 	Keypress: down
+260.5874 	INFO 	Keyboard events cleared
+260.5863 	EXP 	Arrow2: autoDraw = False
+260.5863 	EXP 	Arrow2: ori = 0.0
+260.5863 	EXP 	Arrow2: autoDraw = True
+263.0934 	DATA 	Keypress: down
+263.1044 	INFO 	Keyboard events cleared
+263.1030 	EXP 	Arrow2: autoDraw = False
+263.1030 	EXP 	Arrow2: ori = 270.0
+263.1030 	EXP 	Arrow2: autoDraw = True
+267.2107 	DATA 	Keypress: left
+267.2210 	INFO 	Keyboard events cleared
+267.2196 	EXP 	Arrow2: autoDraw = False
+267.2196 	EXP 	Arrow2: ori = 180.0
+267.2196 	EXP 	Arrow2: autoDraw = True
+268.1912 	DATA 	Keypress: up
+268.2044 	INFO 	Keyboard events cleared
+268.2030 	EXP 	Arrow2: autoDraw = False
+268.2030 	EXP 	Arrow2: ori = 270.0
+268.2030 	EXP 	Arrow2: autoDraw = True
+269.4784 	DATA 	Keypress: left
+269.4868 	INFO 	Keyboard events cleared
+269.4860 	EXP 	Arrow2: autoDraw = False
+269.4860 	EXP 	Arrow2: ori = 90.0
+269.4860 	EXP 	Arrow2: autoDraw = True
+271.0765 	DATA 	Keypress: right
+271.0877 	INFO 	Keyboard events cleared
+271.0863 	EXP 	Arrow2: autoDraw = False
+271.0863 	EXP 	Arrow2: ori = 270.0
+271.0863 	EXP 	Arrow2: autoDraw = True
+271.9581 	DATA 	Keypress: left
+271.9876 	INFO 	Keyboard events cleared
+271.9862 	EXP 	Arrow2: autoDraw = False
+271.9862 	EXP 	Arrow2: ori = 0.0
+271.9862 	EXP 	Arrow2: autoDraw = True
+276.7424 	DATA 	Keypress: up
+276.7541 	INFO 	Keyboard events cleared
+276.7529 	EXP 	Arrow2: autoDraw = False
+276.7529 	EXP 	Arrow2: ori = 90.0
+276.7529 	EXP 	Arrow2: autoDraw = True
+280.2749 	DATA 	Keypress: right
+280.2868 	INFO 	Keyboard events cleared
+280.2857 	EXP 	Arrow2: autoDraw = False
+280.2857 	EXP 	Arrow2: ori = 180.0
+280.2857 	EXP 	Arrow2: autoDraw = True
+282.9755 	DATA 	Keypress: down
+282.9869 	INFO 	Keyboard events cleared
+282.9858 	EXP 	Arrow2: autoDraw = False
+282.9858 	EXP 	Arrow2: ori = 0.0
+282.9858 	EXP 	Arrow2: autoDraw = True
+291.8933 	DATA 	Keypress: up
+291.9038 	INFO 	Keyboard events cleared
+291.9024 	EXP 	Arrow2: autoDraw = False
+291.9024 	EXP 	Arrow2: ori = 90.0
+291.9024 	EXP 	Arrow2: autoDraw = True
+293.6544 	DATA 	Keypress: right
+293.6692 	INFO 	Keyboard events cleared
+293.6687 	EXP 	Arrow2: autoDraw = False
+293.6687 	EXP 	Arrow2: ori = 180.0
+293.6687 	EXP 	Arrow2: autoDraw = True
+299.7436 	DATA 	Keypress: down
+299.7538 	INFO 	Keyboard events cleared
+299.7524 	EXP 	Arrow2: autoDraw = False
+299.7524 	EXP 	Arrow2: ori = 0.0
+299.7524 	EXP 	Arrow2: autoDraw = True
+305.5419 	DATA 	Keypress: up
+305.5533 	INFO 	Keyboard events cleared
+305.5522 	EXP 	Arrow2: autoDraw = False
+305.5522 	EXP 	Arrow2: ori = 0.0
+305.5522 	EXP 	Arrow2: autoDraw = True
+306.3935 	DATA 	Keypress: up
+306.4031 	INFO 	Keyboard events cleared
+306.4019 	EXP 	Arrow2: autoDraw = False
+306.4019 	EXP 	Arrow2: ori = 0.0
+306.4019 	EXP 	Arrow2: autoDraw = True
+311.6377 	DATA 	Keypress: left
+311.6521 	INFO 	Keyboard events cleared
+311.6514 	EXP 	Arrow2: autoDraw = False
+311.6514 	EXP 	Arrow2: ori = 0.0
+311.6514 	EXP 	Arrow2: autoDraw = True
+315.5600 	DATA 	Keypress: up
+315.5703 	INFO 	Keyboard events cleared
+315.5687 	EXP 	Arrow2: autoDraw = False
+315.5687 	EXP 	Arrow2: ori = 90.0
+315.5687 	EXP 	Arrow2: autoDraw = True
+318.7401 	DATA 	Keypress: right
+318.7529 	INFO 	Keyboard events cleared
+318.7519 	EXP 	Arrow2: autoDraw = False
+318.7519 	EXP 	Arrow2: ori = 180.0
+318.7519 	EXP 	Arrow2: autoDraw = True
+324.3432 	DATA 	Keypress: down
+324.3454 	EXP 	Arrow2: autoDraw = False
+324.3456 	EXP 	ContrastSen: status = STOPPED
+324.4063 	INFO 	saved data to 'D:\\Orientation\\data/KM_ContrastSen_2025-02-27_13h35.39.787.csv'
+324.4259 	INFO 	saved data to D:\Orientation\data/KM_ContrastSen_2025-02-27_13h35.39.787.psydat
