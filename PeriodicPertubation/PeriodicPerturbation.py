@@ -335,10 +335,11 @@ StampedTime = []
 Cond = []
 TrialTimer.reset()
 for y in Exp:
+    TrialTimer.reset()
     for x in range(PresentationRepeats):
         # Create stimuli
         LeftEye, RightEye, TriggerL, TriggerR = createRadialStim(winL, winR, resY, Condition=y)
-    
+
         fusionL.draw()
         fusionR.draw()
         LeftEye.draw()
@@ -408,6 +409,7 @@ for y in Exp:
     winL.flip()
     winR.flip()
     time.sleep(20)
+    
 
 #--------------------------------------
 #              End/Cleanup
