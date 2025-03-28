@@ -295,7 +295,7 @@ for y in Exp:
 #event.waitKeys()
 if params['Observer'] != 'z':
     FileName = './data/DD_' + params['Observer'] +  '_' + Date + '.csv'
-    with open(FileName, 'wb+') as csvfile:
+    with open(FileName, 'w+', newline="") as csvfile:
         Writer = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         Writer.writerow(["ParticipantID", "Condition", "PressedKey", "TrialTime", "StampedTime"])
@@ -342,12 +342,10 @@ print(f'\nAverage dominance duration is {AvDomDur}')
 
 if params['Observer'] != 'z':
     FileName = './data/ExDur_' + params['Observer'] + '.csv'
-    with open(FileName, 'w+') as csvfile:
+    with open(FileName, 'a+', newline="") as csvfile:
         Writer = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        Writer.writerow("ExclusivePerceptDurations")
-        for x in range(len(PressedKeys)):
-            Writer.writerow(ExclusivePerceptsDur[x])
+        Writer.writerow(ExclusivePerceptsDur)
     csvfile.close()
 
 # Output histogram showing frequency of percept lengths

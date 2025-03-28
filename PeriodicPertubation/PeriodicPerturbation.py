@@ -9,8 +9,14 @@ RH 27/02/25
 """
 
 # Import modules
-import psychopy # for version checking etc.
+import psychopy
 from psychopy import *
+from numpy import *
+#rom scipy import *
+import time
+from datetime import datetime
+import csv
+
 # Check version / deal with stimuli slightly differently
 version = psychopy.__version__
 psychopy_modern = False 
@@ -22,20 +28,133 @@ else:
     psychopy_modern = True
     psychopy.plugins.activatePlugins() # needed for modern version
     visual.PatchStim = visual.GratingStim # PatchStim migrated to GratingStim in newer versions
-
-from numpy import *
-from scipy import *
-import time, copy 
-from datetime import datetime
-from numpy.random import shuffle
-import csv
-import random as rand
+    
 print(visual.__file__)
-#--------------------------------------
-#              Initialisation
-#--------------------------------------
 
-simulationMode = False
+# %% Experiment variables
+
+simulationMode = True
+
+# Experiment params
+NumTrials = 1 # How many times through all conditions
+PresentationRepeats = 1 # Number of both triggers in a trial
+ConditionList = ['HoriL', 'HoriR', 'VertL', 'VertR', 'SlantL', 'SlantR'] 
+InterBlockInterval = 2 # Duration of pause between blocks 
+Conts = [0.6, 0.6, 1] # Contrasts of left/Right eye and triggers
+
+# Get Date and start time
+now = datetime.now()
+Date = now.strftime('%d%m%y_%H%M')
+
+# Present a dialogue box that asks for the observers initials
+params = {'Observer' : ''}
+paramsDlg2 = gui.DlgFromDict(params, title='Travelling Waves Basic', 
+                             fixed=['date'])
+Name = params['Observer']
+Name=Name.upper()
+
+# Mean dominace duration from DominanceDuration.py to use as trigger rate
+AllDurations = []
+DurationsFileName = "../DominanceDuration/Data/ExDur_" + params["Observer"] + ".csv"
+with open(DurationsFileName, newline='') as csvfile:
+    DurationsReader = csv.reader(csvfile, delimiter=',')
+    for row in DurationsReader:
+        AllDurations.extend(row)
+
+# The durations are intially read as strings so need to change to floats
+AllDurationsFloat = [float(i) for i in AllDurations] 
+
+DurationMean = mean(AllDurationsFloat)
+print(f'The trigger rate is {DurationMean}s')
+
+# Triggers are always shown for 0.5 seconds 
+TriggerRate = DurationMean - 0.5
+
+# %% Functions
+
+# Could do with outputting the global time too
+def TrialSection(SectionLength, SectionTimer, TrialClock, GlobalClock, ID, PressedKeys, 
+                 TrialTime, GlobalTList, Cond):
+    """
+    Can be placed after a stimuli presentation to act as a constant check
+    for button presses for a select period of time (SectionLength).
+    """
+    SectionTimer.reset()
+    while SectionTimer.getTime() <= SectionLength:
+        Keys = event.getKeys(timeStamped=TrialClock)
+        
+        if Keys:
+            Results = Keys[0]
+            k = Results[0].strip("[']")
+            ID.append(params['Observer'])
+            PressedKeys.append(k)
+            TrialTime.append(TrialClock.getTime())
+            Global = GlobalClock.getTime()
+            GlobalTList.append(Global)
+            Cond.append(y)
+
+    return ID, PressedKeys, TrialTime, GlobalTList, Cond
+
+def RescaleOnZero(InArray):
+    """
+    Takes a numpy array of 265 luminance values and converts them to -1 to 1.
+    
+    InArray = Numpy array of ints from 0-265
+    """
+    InArray = InArray / 128
+    InArray = InArray - 1
+    return InArray
+
+def createGratingStim(
+        winL, winR, resY, Units="deg", 
+        Contrast=(Conts), Condition="HoriL", 
+        SimMode = simulationMode, Textures = None):
+    """
+    Creates grating stimuli
+    """
+    # Get texture orientation name
+    if Condition.startswith("H"):
+        TextName = "Hori"
+    elif Condition.startswith("V"):
+        TextName = "Vert"
+    elif Condition.startswith("S"):
+        TextName = "SlantMinus45"
+        
+    # Create textures in each eye
+    if Condition.endswith("L"):
+        # Test patch
+        LeftEye = visual.GratingStim(winL, tex=Textures[TextName], mask=None, 
+                                    units=Units, size=(1.6,10), 
+                                    contrast=Contrast[0], sf=0.75)
+        TriggerL = visual.GratingStim(winL, tex=Textures[TextName], mask=None, 
+                                    units=Units, size=(1.6,1), sf=0.75,
+                                    contrast=Contrast[2], pos=[0,4.5])
+        # Control patch
+        RightEye = visual.GratingStim(winR, tex=Textures["Slant45"], mask=None, 
+                                    units=Units, size=(1.6,10), 
+                                    contrast=Contrast[1], sf=0.75)
+        TriggerR = visual.GratingStim(winR, tex=Textures["Slant45"], mask=None, 
+                                    units=Units, size=(1.6,1), sf=0.75,
+                                    contrast=Contrast[2], pos=[0,-4.5])
+    else:
+        # Test Patch
+        RightEye = visual.GratingStim(winR, tex=Textures["Hori"], mask=None, 
+                                    units=Units, size=(1.6,10), 
+                                    contrast=Contrast[1], sf=0.75)
+        TriggerR = visual.GratingStim(winR, tex=Textures[TextName], mask=None, 
+                                    units=Units, size=(1.6,1), sf=0.75,
+                                    contrast=Contrast[2], pos=[0,-4.5])
+        # Control patch
+        LeftEye = visual.GratingStim(winL, tex=Textures["Slant45"], mask=None, 
+                                    units=Units, size=(1.6,10), 
+                                    contrast=Contrast[0], sf=0.75)
+        TriggerL = visual.GratingStim(winL, tex=Textures["Slant45"], mask=None, 
+                                    units=Units, size=(1.6,1), sf=0.75,
+                                    contrast=Contrast[2], pos=[0,4.5])
+        
+    return LeftEye, RightEye, TriggerL, TriggerR
+
+# %% Setting up windows
 
 if simulationMode:
     print("Running in simulation mode")
@@ -47,7 +166,6 @@ if simulationMode:
     pos = [[50,50],[100+resX, 50]] # offset 2 windows
     allowGUI = True
     viewScale = [0.4, 0.4]
-    from spiral import *
 
 else:
     print("Running in experiment mode")
@@ -59,192 +177,125 @@ else:
     viewScale = [1, 1]
     fullscrMode = True
     
-# Experiment params
-NumTrials = 5
-Conts = [0.5,0.5]
-PresentationRepeats =   12
-
-# Get Date and start time
-now = datetime.now()
-Date = now.strftime('%d%m%y_%H%M')
-
-# present a dialogue box for changing params
-params = {'Observer':''}
-paramsDlg2 = gui.DlgFromDict(params, title='Travelling Waves Basic', fixed=['date'])
-Name = params['Observer']
-Name=Name.upper()
-
-
-ConditionList = ['Left','Right'] 
- 
-Exp = data.TrialHandler(ConditionList,NumTrials, method='random', dataTypes=None, extraInfo=None,seed=None,originPath=None)
+# Setup trial handeler and window maybe move
+Exp = data.TrialHandler(ConditionList,NumTrials, method='random', 
+                        dataTypes=None, extraInfo=None, seed=None,
+                        originPath=None)
 
 # Setup window (this works on old as well as new versions)
 winL = visual.Window(size=(resX,resY), 
                      monitor=theMonitor, units='pix', 
                      bitsMode=None, fullscr=fullscrMode, 
-                     allowGUI=allowGUI, color=0.0,screen=0, pos = pos[0], viewScale=viewScale)
+                     allowGUI=allowGUI, color=0.0,screen=0, pos = pos[0], 
+                     viewScale=viewScale)
 winR = visual.Window(size=(resX,resY), 
                      monitor=theMonitor, units='pix', 
                      bitsMode=None, fullscr=fullscrMode, 
-                     allowGUI=allowGUI, color=0.0,screen=1, pos = pos[1], viewScale=viewScale)
-
-winL.setGamma([2.05741,2.05741,2.05741])
-winR.setGamma([1.83718,1.83718,1.83718])
-
-# Clock
-Clock = core.Clock()
-SectionClock = core.Clock()
+                     allowGUI=allowGUI, color=0.0,screen=1, pos = pos[1], 
+                     viewScale=viewScale)
+if not simulationMode:
+    winL.setGamma([2.05741,2.05741,2.05741])
+    winR.setGamma([1.83718,1.83718,1.83718])
 
 
-def TrialSection(SectionLength, SectionClock, TrialTimer, ID, PressedKeys, TrialTime, StampedTime, Cond):
-    SectionClock.reset()
-    while SectionClock.getTime() <= SectionLength:
-        Keys = event.getKeys(timeStamped=TrialTimer)
-        if Keys:
-            Results = Keys[0]
-            k = Results[0].strip("[']")
-            ID.append(params['Observer'])
-            PressedKeys.append(k)
-            TrialTime.append(TrialTimer.getTime())
-            StampedTime.append(Results[1])
-            Cond.append(y)
-    print(SectionClock.getTime())
-    return ID, PressedKeys, TrialTime, StampedTime, Cond
+# %% Create Stimuli
+# Create textures
+N = 256
+x = linspace(-pi,pi, N)
+Sine1D = 128.0 + (127.0 * sin(x * 2.0))
+Sine1D = uint8(Sine1D)
+Vertical = tile(Sine1D, (N,1))
+
+Horizontal = copy(Vertical)
+Slant45 = copy(Vertical)
+SlantMinus45 = copy(Vertical)
 
 
-#--------------------------------------
-#            Create stimlui 
-#--------------------------------------
+# Transforms
+for i in range(N):
+    Slant45[i]= roll(Sine1D,-i) 
+for i in range(N):
+    SlantMinus45[i]= roll(Sine1D,i) 
+Horizontal = Horizontal.transpose() 
 
-# Create stimlui initial stimuli
-# RadialStim has changed / been moved in newer versions of psychopy, 
-# so deal with this separately !
-y= 'Left'
-def createRadialStim(winL, winR, resY, units="cm", contrast=(Conts), Condition="Left", SimMode = simulationMode):
-    """
-    creates radial patches and returns the radial stim, concentric stim, 
-    spiral stim, and masks for L and R
-    """
-    if SimMode == True:
-        if Condition == "Left": # for displaying on lab
-           LeftEye = visual.GratingStim(winL,size=[15, 2.5], ori=90,
-                                 sf=0.75, contrast=contrast[0], units=units)
-           
-           TriggerL = visual.GratingStim(winL,size=[1.5, 2.5], ori=90,
-                                  sf=0.75, pos=[0,-7], contrast = 1, units=units)
-        
-           RightEye = visual.GratingStim(winR,size=[2.5, 15],
-                                  sf=1, contrast = contrast[1], units=units)
-    
-           TriggerR = visual.GratingStim(winR,size=[2.5, 1.5], 
-                                  sf=1, pos=[0,7], contrast = 1, units=units)
-           
-        elif Condition == "Right": # for displaying on lab
-          # RightEye = visual.GratingStim(winR,size=[resY/1.2, resY/10], ori=90,
-           #                      sf=2500, units=units, contrast=contrast[0])
-           RightEye = visual.GratingStim(winR,size=[15, 2.5], ori=90,
-                                 sf=0.75,  contrast = contrast[0], units=units)
-           
-           TriggerR = visual.GratingStim(winR,size=[1.5, 2.5], ori=90,
-                                 sf=0.75,  pos=[0,-7], contrast = 1, units=units)
-        
-           LeftEye = visual.GratingStim(winL,size=[2.5, 15],
-                                  sf=1, contrast = contrast[1], units=units)
-         
-           TriggerL = visual.GratingStim(winL,size=[2.5, 1.5], 
-                                  sf=1, pos=[0,7], contrast = 1, units=units)
-    else:
-        if Condition == "Left": # for displaying on lab
-           LeftEye = visual.PatchStim(winL,size=[15, 2.5], ori=90, tex='sin',
-                                 sf=0.75, contrast=contrast[0], units=units)
-           
-           TriggerL = visual.PatchStim(winL,size=[1.5, 2.5], ori=90, tex='sin',
-                                  sf=0.75, pos=[0,-7], contrast = 1, units=units)
-        
-           RightEye = visual.PatchStim(winR,size=[2.5, 15], tex='sin',
-                                  sf=1, contrast = contrast[1], units=units)
-    
-           TriggerR = visual.PatchStim(winR,size=[2.5, 1.5], tex='sin',
-                                  sf=1, pos=[0,7], contrast = 1, units=units)
-           
-        elif Condition == "Right": # for displaying on lab
-          # RightEye = visual.GratingStim(winR,size=[resY/1.2, resY/10], ori=90,
-           #                      sf=2500, units=units, contrast=contrast[0])
-           RightEye = visual.PatchStim(winR,size=[15, 2.5], ori=90,tex='sin',
-                                 sf=0.75,  contrast = contrast[0], units=units)
-           
-           TriggerR = visual.PatchStim(winR,size=[1.5, 2.5], ori=90,tex='sin',
-                                 sf=0.75,  pos=[0,-7], contrast = 1, units=units)
-        
-           LeftEye = visual.PatchStim(winL,size=[2.5, 15],tex='sin',
-                                  sf=1, contrast = contrast[1], units=units)
-         
-           TriggerL = visual.PatchStim(winL,size=[2.5, 1.5], tex='sin',
-                                  sf=1, pos=[0,7], contrast = 1, units=units)
+# Normalise
+Vertical = RescaleOnZero(Vertical)
+Horizontal = RescaleOnZero(Horizontal)
+Slant45 = RescaleOnZero(Slant45)
+SlantMinus45 = RescaleOnZero(SlantMinus45)
+
+#Maybe rename left and rights to slant45 and slantminus45
+TexturesIn = {"Vert" : Vertical, "Hori" : Horizontal,
+            "Slant45": Slant45, "SlantMinus45" : SlantMinus45}
 
 
-#        if Condition == "Left": # for displaying on lab
-#            LeftEye = visual.PatchStim(winL,size=[15, 15], ori=45, tex='sin',
-#                sf=0.75, contrast=Contrast[0], units=units)
-#            TriggerL = visual.PatchStim(winL,size=[15, 1], ori=45, tex='sin',
-#                sf=1, pos=[0,7], contrast = 1, units=units)
-#            RightEye = visual.PatchStim(winR,size=[15, 15], ori=-45,tex='sin',
-#                sf=1, contrast = Contrast[1], units=units)
-#            TriggerR = visual.PatchStim(winR,size=[15, 1], ori=-45, tex='sin',
-#                sf=0.75,  pos=[0,-7], contrast = 1, units=units)
-
-#    if Condition == "Right": # for displaying on lab
-#           RightEye = visual.PatchStim(winR,size=[15, 15], ori=45, tex='sin',
-#                                 sf=0.75,  contrast = Contrast[1], units=units)
-#           TriggerR = visual.PatchStim(winR,size=[15, 1], ori=45, tex='sin',
-#                                 sf=0.75,  pos=[0,-7], contrast = 1, units=units)
-#           LeftEye = visual.PatchStim(winL,size=[15, 15],ori=-45,tex='sin',
-#                                  sf=1, contrast = Contrast[0], units=units)
-#           TriggerL = visual.PatchStim(winL,size=[1, 15], ori=-45, tex='sin',
-#                                  sf=1, pos=[0,7], contrast = 1, units=units)
-    return LeftEye, RightEye, TriggerL, TriggerR
-
-
-LeftEye, RightEye, TriggerL, TriggerR = createRadialStim(winL, winR, resY, Condition = "Left")
+# Initialise grating stims
+LeftEye, RightEye, TriggerL, TriggerR = createGratingStim(winL, winR, resY, 
+                                                         Condition = "HoriL",
+                                                         Textures=TexturesIn)
 
 # End location
-
-EndLocL2 = visual.PatchStim(winL, tex='None', units='pix', pos=[-140,-320], size=(6,60), color=[-1,-1,-1], ori=200)
-EndLocL1 = visual.PatchStim(winL, tex='None', units='pix', pos=[140,-320], size=(6,60), color=[-1,-1,-1], ori=340)
-EndLocR2 = visual.PatchStim(winR, tex='None', units='pix', pos=[-140,-320], size=(6,60), color=[-1,-1,-1], ori=200)
-EndLocR1 = visual.PatchStim(winR, tex='None', units='pix', pos=[140,-320], size=(6,60), color=[-1,-1,-1], ori=340)
-
+EndLocL2 = visual.PatchStim(winL, tex='None', units='pix', pos=[-140,-320], 
+                            size=(6,60), color=[-1,-1,-1], ori=200)
+EndLocL1 = visual.PatchStim(winL, tex='None', units='pix', pos=[140,-320], 
+                            size=(6,60), color=[-1,-1,-1], ori=340)
+EndLocR2 = visual.PatchStim(winR, tex='None', units='pix', pos=[-140,-320], 
+                            size=(6,60), color=[-1,-1,-1], ori=200)
+EndLocR1 = visual.PatchStim(winR, tex='None', units='pix', pos=[140,-320], 
+                            size=(6,60), color=[-1,-1,-1], ori=340)
 
 #Create fixation and fusion lock
 #Dot right
-fixationL = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",units='pix',rgb=-1, pos=[-65,0], size=(40.0,40.0))
-fixationR = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",units='pix',rgb=-1, pos=[-65,0], size=(40.0,40.0))
+fixationL = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",
+                             units='pix', rgb=-1, pos=[-65,0], 
+                             size=(40.0,40.0))
+fixationR = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",
+                             units='pix', rgb=-1, pos=[-65,0], 
+                             size=(40.0,40.0))
 
-dotL = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",units='pix',rgb=1, pos=[-65,0], size=(20.0,20.0))
-dotR = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",units='pix',rgb=1, pos=[-65,0], size=(20.0,20.0))
+dotL = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",
+                        units='pix',rgb=1, pos=[-65,0], size=(20.0,20.0))
+dotR = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",
+                        units='pix',rgb=1, pos=[-65,0], size=(20.0,20.0))
+
 #Create fixation and fusion lock
 #Dot left
-fixationL2 = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",units='pix',rgb=-1, pos=[65,0], size=(40.0,40.0))
-fixationR2 = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",units='pix',rgb=-1, pos=[65,0], size=(40.0,40.0))
+fixationL2 = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",
+                              units='pix', rgb=-1, pos=[65,0], 
+                              size=(40.0,40.0))
+fixationR2 = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",
+                              units='pix', rgb=-1, pos=[65,0], 
+                              size=(40.0,40.0))
 
-dotL2 = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",units='pix',rgb=1, pos=[65,0], size=(20.0,20.0))
-dotR2 = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",units='pix',rgb=1, pos=[65,0], size=(20.0,20.0))
+dotL2 = visual.PatchStim(winL, texRes=512, tex='None', mask="circle",
+                         units='pix',rgb=1, pos=[65,0], size=(20.0,20.0))
+dotR2 = visual.PatchStim(winR, texRes=512, tex='None', mask="circle",
+                         units='pix',rgb=1, pos=[65,0], size=(20.0,20.0))
 
 #Spokes
 # to the right window    
-BarTopL = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, pos=(-2.3,1),ori=0, size=(2,0.2))
-BarTopR = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, pos=(-2.3,1),ori=0, size=(2,0.2))
-BarTopL2 = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, pos=(2.3,1),ori=0, size=(2,0.2))
-BarTopR2 = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, pos=(2.3,1),ori=0, size=(2,0.2))
-BarLeft = visual.PatchStim(winR, tex='none', units='pix', rgb=1.0, pos=(-90,0),ori=0, size=(90,12))
+BarTopL = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, 
+                           pos=(-2.3,1),ori=0, size=(2,0.2))
+BarTopR = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, 
+                           pos=(-2.3,1),ori=0, size=(2,0.2))
+BarTopL2 = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, 
+                            pos=(2.3,1),ori=0, size=(2,0.2))
+BarTopR2 = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, 
+                            pos=(2.3,1),ori=0, size=(2,0.2))
+BarLeft = visual.PatchStim(winR, tex='none', units='pix', rgb=1.0,  # why is the units different?
+                           pos=(-90,0),ori=0, size=(90,12))
 
 # to the left window    
-BarBottomL = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, pos=(-2.3,-1),ori=0, size=(2,0.2))
-BarBottomR = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, pos=(-2.3,-1),ori=0, size=(2,0.2))
-BarBottomL2 = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, pos=(2.3,-1),ori=0, size=(2,0.2))
-BarBottomR2 = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, pos=(2.3,-1),ori=0, size=(2,0.2))
-BarRight = visual.PatchStim(winL, tex='none', units='pix', rgb=-1.0, pos=(90,0),ori=0, size=(90,12))
+BarBottomL = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, 
+                              pos=(-2.3, -1), ori=0, size=(2,0.2))
+BarBottomR = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, 
+                              pos=(-2.3, -1), ori=0, size=(2,0.2))
+BarBottomL2 = visual.PatchStim(winL, tex='none', units='cm', rgb=-1.0, 
+                               pos=(2.3, -1), ori=0, size=(2,0.2))
+BarBottomR2 = visual.PatchStim(winR, tex='none', units='cm', rgb=-1.0, 
+                               pos=(2.3, -1),ori=0, size=(2,0.2))
+BarRight = visual.PatchStim(winL, tex='none',  units='pix', rgb=-1.0, 
+                            pos=(90,0), ori=0, size=(90,12))
 
 #Fusion lock
 LockSize=512
@@ -272,25 +323,31 @@ fusionR = visual.PatchStim(winR, tex=array,
 # Blocks
 # Named = BlockLeftMonitorLeft/Right/Top/Bottom (side of screen)
 units = 'cm'
-BlockLML = visual.PatchStim(winL, tex='none', size = [10,15], pos=[-6.125,0], color=[0,0,0], units=units)
-BlockLMR = visual.PatchStim(winL, tex='none', size = [10,15], pos=[6.125,0], color=[0,0,0], units=units)
-BlockLMT = visual.PatchStim(winL, tex='none', size = [10,5], pos=[0,10], color=[0,0,0], units=units)
-BlockLMB = visual.PatchStim(winL, tex='none', size = [10,5], pos=[0,-10], color=[0,0,0], units=units)
+BlockLML = visual.PatchStim(winL, tex='none', size = [10,15], pos=[-6.125,0], 
+                            color=[0,0,0], units=units)
+BlockLMR = visual.PatchStim(winL, tex='none', size = [10,15], pos=[6.125,0], 
+                            color=[0,0,0], units=units)
+BlockLMT = visual.PatchStim(winL, tex='none', size = [10,5], pos=[0,10], 
+                            color=[0,0,0], units=units)
+BlockLMB = visual.PatchStim(winL, tex='none', size = [10,5], pos=[0,-10], 
+                            color=[0,0,0], units=units)
 
-BlockRML = visual.PatchStim(winR, tex='none', size = [10,15], pos=[-6.125,0], color=[0,0,0], units=units)
-BlockRMR = visual.PatchStim(winR, tex='none', size = [10,15], pos=[6.125,0], color=[0,0,0], units=units)
-BlockRMT = visual.PatchStim(winR, tex='none', size = [10,5], pos=[0,10], color=[0,0,0], units=units)
-BlockRMB = visual.PatchStim(winR, tex='none', size = [10,5], pos=[0,-10], color=[0,0,0], units=units)
+BlockRML = visual.PatchStim(winR, tex='none', size = [10,15], pos=[-6.125,0], 
+                            color=[0,0,0], units=units)
+BlockRMR = visual.PatchStim(winR, tex='none', size = [10,15], pos=[6.125,0], 
+                            color=[0,0,0], units=units)
+BlockRMT = visual.PatchStim(winR, tex='none', size = [10,5], pos=[0,10], 
+                            color=[0,0,0], units=units)
+BlockRMB = visual.PatchStim(winR, tex='none', size = [10,5], pos=[0,-10], 
+                            color=[0,0,0], units=units)
 
 
-Blocks = [BlockLML,BlockLMR,BlockLMT,BlockLMB,BlockRML,BlockRMR,BlockRMT,BlockRMB]
+Blocks = [BlockLML,BlockLMR,BlockLMT,BlockLMB,
+          BlockRML,BlockRMR,BlockRMT,BlockRMB]
 
-Fixation = [BarLeft, BarRight, BarTopL, BarTopR, BarBottomL, BarBottomR, BarTopL2, BarTopR2, BarBottomL2, BarBottomR2, fixationL, fixationR, dotL, dotR, fixationL2, fixationR2, dotL2, dotR2]
-
-# Break stimuli
-
-BreakStimL = visual.RadialStim(winL,size=resY-350,angularCycles=0, color=1,angularRes=35,units="pix", radialCycles = 0, contrast = 1)
-BreakStimR = visual.RadialStim(winR,size=resY-350,angularCycles=0, color=1,angularRes=35,units="pix", radialCycles = 0, contrast = 1)
+Fixation = [BarLeft, BarRight, BarTopL, BarTopR, BarBottomL, BarBottomR, 
+            BarTopL2, BarTopR2, BarBottomL2, BarBottomR2, fixationL, fixationR, 
+            dotL, dotR, fixationL2, fixationR2, dotL2, dotR2]
 
 #--------------------------------------
 #                 Messages
@@ -304,15 +361,26 @@ FixationMsgL = visual.TextStim(winL, 'Please ensure stimuli is fusing. \nPress t
 FixationMsgR = visual.TextStim(winR, 'Please ensure stimuli is fusing. \nPress the Right arrow when the wave reaches the desitination point\nPress the Left arrow if the wave is not triggered\nPress any button to begin', pos=(0,250),  
     flipHoriz=True, height=40, wrapWidth=1000)
 
-#PauseMsgL = visual.TextStim(winL, 'Break in experiment \nPress any button to continue',  flipHoriz=True, height=40, wrapWidth=1000)
-#PauseMsgR = visual.TextStim(winR, 'Break in experiment \nPress any button to continue',  flipHoriz=True, height=40, wrapWidth=1000)
-
 EndMsgL = visual.TextStim(winL, 'Experiment Over \nThanks for Participating!',  flipHoriz=True, height=40, wrapWidth=1000)
 EndMsgR = visual.TextStim(winR, 'Experiment Over \nThanks for Participating!',  flipHoriz=True, height=40, wrapWidth=1000)
 
 #--------------------------------------
 #           Presentation Loop
 #--------------------------------------
+
+# Initialise lists that will store output data
+Keys = []
+ID=[]
+PressedKeys = []
+TrialTime = []
+GlobalTList = []
+Cond = []
+
+# TrialClock for trials starting on 0
+# SessionClock for global time
+TrialClock = core.Clock()
+SectionTimer = core.Clock()
+GlobalClock = core.Clock()
 
 #Check fusion
 fusionL.draw()
@@ -325,33 +393,27 @@ winL.flip()
 winR.flip()
 event.waitKeys()
 
-# Initialise lists that will store output data
-TrialTimer = core.Clock()
-Keys = []
-ID=[]
-PressedKeys = []
-TrialTime = []
-StampedTime = []
-Cond = []
-TrialTimer.reset()
-for y in Exp:
-    TrialTimer.reset()
-    for x in range(PresentationRepeats):
-        # Create stimuli
-        LeftEye, RightEye, TriggerL, TriggerR = createRadialStim(winL, winR, resY, Condition=y)
+for y in Exp: # Main presentation loop
+    LeftEye, RightEye, TriggerL, TriggerR = createGratingStim(winL, winR, resY, 
+                                                              Condition=y, 
+                                                              Textures=TexturesIn)
+    TrialClock.reset()
+    
+    # One trigger length pause at the start of each loop
+    fusionL.draw()
+    fusionR.draw()
+    LeftEye.draw()
+    RightEye.draw()
+    for x in Blocks:
+        x.draw()
+    for x in Fixation:
+        x.draw()
+    winL.flip()
+    winR.flip()
+    ID, PressedKeys, TrialTime, GlobalTList, Cond = TrialSection(TriggerRate, SectionTimer, TrialClock, GlobalClock, ID, PressedKeys, TrialTime, GlobalTList, Cond)
 
-        fusionL.draw()
-        fusionR.draw()
-        LeftEye.draw()
-        RightEye.draw()
-        for x in Blocks:
-            x.draw()
-        for x in Fixation:
-            x.draw()
-        winL.flip()
-        winR.flip()
-        ID, PressedKeys, TrialTime, StampedTime, Cond = TrialSection(0.5, SectionClock, TrialTimer, ID, PressedKeys, TrialTime, StampedTime, Cond)
-        
+    for x in range(PresentationRepeats):
+        # Present left trigger
         fusionL.draw()
         fusionR.draw()
         LeftEye.draw()
@@ -363,8 +425,9 @@ for y in Exp:
             x.draw()
         winL.flip()
         winR.flip()
-        ID, PressedKeys, TrialTime, StampedTime, Cond = TrialSection(0.5, SectionClock, TrialTimer, ID, PressedKeys, TrialTime, StampedTime, Cond)
-        
+        ID, PressedKeys, TrialTime, GlobalTList, Cond = TrialSection(0.5, SectionTimer, TrialClock, GlobalClock, ID, PressedKeys, TrialTime, GlobalTList, Cond)
+
+        # Remove left Trigger
         fusionL.draw()
         fusionR.draw()
         LeftEye.draw()
@@ -375,8 +438,9 @@ for y in Exp:
             x.draw()
         winL.flip()
         winR.flip()
-        ID, PressedKeys, TrialTime, StampedTime, Cond = TrialSection(1, SectionClock, TrialTimer, ID, PressedKeys, TrialTime, StampedTime, Cond)
+        ID, PressedKeys, TrialTime, GlobalTList, Cond = TrialSection(TriggerRate, SectionTimer, TrialClock, GlobalClock, ID, PressedKeys, TrialTime, GlobalTList, Cond)
         
+        # Present right trigger
         fusionL.draw()
         fusionR.draw()
         LeftEye.draw()
@@ -388,8 +452,9 @@ for y in Exp:
             x.draw()
         winL.flip()
         winR.flip()
-        ID, PressedKeys, TrialTime, StampedTime, Cond = TrialSection(0.5, SectionClock, TrialTimer, ID, PressedKeys, TrialTime, StampedTime, Cond)
+        ID, PressedKeys, TrialTime, GlobalTList, Cond = TrialSection(0.5, SectionTimer, TrialClock, GlobalClock, ID, PressedKeys, TrialTime, GlobalTList, Cond)
         
+        # Remove right trigger
         fusionL.draw()
         fusionR.draw()
         LeftEye.draw()
@@ -400,7 +465,7 @@ for y in Exp:
             x.draw()
         winL.flip()
         winR.flip()
-        ID, PressedKeys, TrialTime, StampedTime, Cond = TrialSection(0.5, SectionClock, TrialTimer, ID, PressedKeys, TrialTime, StampedTime, Cond)
+        ID, PressedKeys, TrialTime, GlobalTList, Cond = TrialSection(TriggerRate, SectionTimer, TrialClock, GlobalClock, ID, PressedKeys, TrialTime, GlobalTList, Cond)
     
     fusionL.draw()
     fusionR.draw()
@@ -408,22 +473,19 @@ for y in Exp:
         x.draw()
     winL.flip()
     winR.flip()
-    time.sleep(20)
+    time.sleep(InterBlockInterval)
     
-
 #--------------------------------------
 #              End/Cleanup
 #--------------------------------------
-if params['Observer'] == 'z':
-    pass
-else:
+if params['Observer'] != 'z':
     FileName = './data/PP_' + params['Observer'] +  '_' + Date + '.csv'
-    with open(FileName, 'wb+') as csvfile:
+    with open(FileName, 'w+', newline="") as csvfile:
         Writer = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        Writer.writerow(["ParticipantID", "Condition", "PressedKey", "TrialTime", "StampedTime"])
+        Writer.writerow(["ParticipantID", "Condition", "PressedKey", "TrialTime", "GlobalTime"])
         for x in range(len(PressedKeys)):
-            Writer.writerow([params['Observer'], Cond[x], PressedKeys[x], TrialTime[x], StampedTime[x]])
+            Writer.writerow([params['Observer'], Cond[x], PressedKeys[x], TrialTime[x], GlobalTList[x]])
     csvfile.close()
 
 winL.close()
