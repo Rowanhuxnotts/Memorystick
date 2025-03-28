@@ -304,6 +304,10 @@ if params['Observer'] != 'z':
     csvfile.close()
 
 
+# %% Create/Append to exclusive dominance duration file
+
+# This file is a column of all exclusive dominace durations that will be read
+# by PeriodicPertubation.py to calculate the trigger periods.
 
 def RmDuplicatePresses(TrialTime, PressedKeys):
     NewTrialTimes = []
@@ -336,6 +340,17 @@ print(MixedPerceptsDur)
 AvDomDur = mean(ExclusivePerceptsDur)
 print(f'\nAverage dominance duration is {AvDomDur}')
 
+if params['Observer'] != 'z':
+    FileName = './data/ExDur_' + params['Observer'] + '.csv'
+    with open(FileName, 'w+') as csvfile:
+        Writer = csv.writer(csvfile, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        Writer.writerow("ExclusivePerceptDurations")
+        for x in range(len(PressedKeys)):
+            Writer.writerow(ExclusivePerceptsDur[x])
+    csvfile.close()
+
+# Output histogram showing frequency of percept lengths
 plt.hist(ExclusivePerceptsDur, bins=25)
 plt.xlabel('Time (s)')
 plt.ylabel('Frequency')
