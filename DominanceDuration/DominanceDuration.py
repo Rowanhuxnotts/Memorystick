@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 #              Initialisation
 #--------------------------------------
 
-simulationMode = True  # False
+simulationMode = False  # False
 
 if simulationMode:
     print("Running in simulation mode")
@@ -59,13 +59,13 @@ else:
     fullscrMode = True
     
 # Experiment params
-NumTrials = 1
-LEContrast=0.5
-REContrast=0.5
+NumTrials = 5
+LEContrast=0.6
+REContrast=0.6
 Contrasts=[LEContrast,REContrast]
 Units="deg"
-TrialLength = 10
-ITI = 1
+TrialLength = 60
+ITI = 20
 # Get Date and start time
 now = datetime.now()
 Date = now.strftime('%d%m%y_%H%M')
@@ -295,7 +295,7 @@ for y in Exp:
 #event.waitKeys()
 if params['Observer'] != 'z':
     FileName = './data/DD_' + params['Observer'] +  '_' + Date + '.csv'
-    with open(FileName, 'w+', newline="") as csvfile:
+    with open(FileName, 'w+') as csvfile:
         Writer = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         Writer.writerow(["ParticipantID", "Condition", "PressedKey", "TrialTime", "StampedTime"])
@@ -338,21 +338,21 @@ for x, y in enumerate(Binaries):
 print(ExclusivePerceptsDur)
 print(MixedPerceptsDur)
 AvDomDur = mean(ExclusivePerceptsDur)
-print(f'\nAverage dominance duration is {AvDomDur}')
+#print(f'\nAverage dominance duration is {AvDomDur}')
 
 if params['Observer'] != 'z':
     FileName = './data/ExDur_' + params['Observer'] + '.csv'
-    with open(FileName, 'a+', newline="") as csvfile:
+    with open(FileName, 'a+') as csvfile:
         Writer = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         Writer.writerow(ExclusivePerceptsDur)
     csvfile.close()
 
 # Output histogram showing frequency of percept lengths
-plt.hist(ExclusivePerceptsDur, bins=25)
-plt.xlabel('Time (s)')
-plt.ylabel('Frequency')
+#plt.hist(ExclusivePerceptsDur, bins=25)
+#plt.xlabel('Time (s)')
+#plt.ylabel('Frequency')
 
 winL.close()
 winR.close()
-plt.show()
+#plt.show()

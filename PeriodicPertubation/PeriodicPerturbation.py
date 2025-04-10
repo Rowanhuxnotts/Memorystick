@@ -36,10 +36,10 @@ print(visual.__file__)
 simulationMode = True
 
 # Experiment params
-NumTrials = 1 # How many times through all conditions
-PresentationRepeats = 1 # Number of both triggers in a trial
+NumTrials = 3 # How many times through all conditions
+PresentationRepeats = 20 # Number of both triggers in a trial
 ConditionList = ['HoriL', 'HoriR', 'VertL', 'VertR', 'SlantL', 'SlantR'] 
-InterBlockInterval = 2 # Duration of pause between blocks 
+InterBlockInterval = 20 # Duration of pause between blocks 
 Conts = [0.6, 0.6, 1] # Contrasts of left/Right eye and triggers
 
 # Get Date and start time
@@ -65,7 +65,7 @@ with open(DurationsFileName, newline='') as csvfile:
 AllDurationsFloat = [float(i) for i in AllDurations] 
 
 DurationMean = mean(AllDurationsFloat)
-print(f'The trigger rate is {DurationMean}s')
+print(f'The trigger rate is {DurationMean}')
 
 # Triggers are always shown for 0.5 seconds 
 TriggerRate = DurationMean - 0.5
@@ -356,7 +356,7 @@ Fixation = [BarLeft, BarRight, BarTopL, BarTopR, BarBottomL, BarBottomR,
 # Inscructions = 
 
 # Check stimuli is fusing
-FixationMsgL = visual.TextStim(winL, 'Please ensure stimuli is fusing. \nPress the Right arrow when the wave reaches the desitination point\nPress the Left arrow if the wave is not triggered\nPress any button to begin', pos=(0,250),  
+FixationMsgL = visual.TextStim(winL, 'Please ensure stimuli is fusing. \nPress the Left arrow when you see the left point grating\nPress the Right arrow for anything else\nPress any button to begin', pos=(0,250),  
     flipHoriz=True, height=40, wrapWidth=1000)
 FixationMsgR = visual.TextStim(winR, 'Please ensure stimuli is fusing. \nPress the Right arrow when the wave reaches the desitination point\nPress the Left arrow if the wave is not triggered\nPress any button to begin', pos=(0,250),  
     flipHoriz=True, height=40, wrapWidth=1000)
